@@ -1,11 +1,15 @@
 import 'package:collectionoffirestore/common.dart';
+import 'package:collectionoffirestore/controller/otpscreen_controller.dart';
 import 'package:collectionoffirestore/method/authmethod.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
-class OtpScreen extends StatelessWidget {
+import '../routes/nameroute.dart';
+
+class OtpScreen extends GetView<OtpScreenController> {
   OtpScreen({Key? key}) : super(key: key);
-  final otpController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +20,22 @@ class OtpScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Otp verification"),
-            const SizedBox(height: 40,),
-            Common.textFiled(text: "enter the otp", controller: otpController),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 40,
+            ),
+            Common.textFiled(
+                text: "enter the otp", controller: controller.otpController),
+            const SizedBox(
+              height: 20,
+            ),
             Common.button(
                 text: "Verify otp ",
                 color: Colors.red,
                 onTap: () {
                   AuthMethod().verifyOTPCode(
                       verificationId: Common.verificationId,
-                      otpcontroller: otpController.text);
+                      otpcontroller: controller.otpController.text);
+                  Get.toNamed(NameRoutes.cardscreen);
                 }),
           ],
         ),

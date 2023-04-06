@@ -79,6 +79,7 @@ class AuthMethod {
       print("userdata $userdata");
       print("finalResult $finalResult");
       print("credential $credential");
+      Get.toNamed(NameRoutes.cardscreen);
     } catch (e) {
       print(e);
     }

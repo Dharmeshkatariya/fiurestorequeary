@@ -1,13 +1,13 @@
 import 'package:collectionoffirestore/common.dart';
+import 'package:collectionoffirestore/controller/mobilescreen_controller.dart';
 import 'package:collectionoffirestore/method/authmethod.dart';
-import 'package:collectionoffirestore/routes/nameroute.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MobileVerificationScreen extends StatelessWidget {
+class MobileVerificationScreen extends GetView<MobileVerificationScreenController> {
   MobileVerificationScreen({Key? key}) : super(key: key);
-  final mobileController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class MobileVerificationScreen extends StatelessWidget {
                 height: 30,
               ),
               Common.textFiled(
-                  text: "Enter mobile number", controller: mobileController),
+                  text: "Enter mobile number", controller: controller.mobileController),
               const SizedBox(
                 height: 8,
               ),
@@ -35,7 +35,7 @@ class MobileVerificationScreen extends StatelessWidget {
                   color: Colors.blue.shade100,
                   onTap: () {
                     AuthMethod().mobileVerifySignIn(
-                        mobilecontroller: mobileController.text);
+                        mobilecontroller: controller.mobileController.text);
 
                   }),
             ],

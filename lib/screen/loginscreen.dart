@@ -42,18 +42,21 @@ class LogInScreen extends StatelessWidget {
                 color: Colors.blue.shade100,
                 onTap: () {
                   _controller.loginUser();
-                  Get.toNamed(NameRoutes.homeScreen);
+                  Get.toNamed(NameRoutes.cardscreen);
                 }),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _rowImage(
                     image: "assets/icon/g.png",
                     onTap: () {
                       AuthMethod().googleSignInUser();
                     }),
-                _rowImage(image: "assets/icon/p.jpg", onTap: () {
-                  Get.toNamed(NameRoutes.mobileVerificationScreen);
-                }),
+                _rowImage(
+                    image: "assets/icon/p.jpg",
+                    onTap: () {
+                      Get.toNamed(NameRoutes.mobileVerificationScreen);
+                    }),
               ],
             )
           ],
