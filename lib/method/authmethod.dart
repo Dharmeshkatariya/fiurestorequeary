@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collectionoffirestore/method/userstore_mnagment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -61,16 +62,33 @@ class AuthMethod {
   }
 
 //google sign in
-  GoogleSignIn googleAuth = GoogleSignIn();
+  GoogleSignIn googleSignIn = GoogleSignIn();
 
   googleSignInUser() async {
-     googleAuth.signIn().then((result) {
-      result!.authentication.then((googleKey) {
-
-      });
-    });
+    try {
+      var result = await googleSignIn.signIn();
+      if (result == null) {}
+      final userdata = await result!.authentication;
+      final credential = GoogleAuthProvider.credential(
+          idToken: userdata.idToken, accessToken: userdata.accessToken);
+      var finalResult = await auth.signInWithCredential(credential);
+      print("Result $result");
+      print(result.displayName);
+      print(result.email);
+      print("userdata $userdata");
+      print("finalResult $finalResult");
+      print("credential $credential");
+    } catch (e) {
+      print(e);
+    }
   }
 
+
+  // log out google log out
+   googleSignOut()async{
+    await googleSignIn.disconnect();
+    auth.signOut();
+   }
 // sign out user
 
   signOutUser() async {

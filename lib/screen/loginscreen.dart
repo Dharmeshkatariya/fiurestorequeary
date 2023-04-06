@@ -1,3 +1,4 @@
+import 'package:collectionoffirestore/method/authmethod.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,9 @@ class LogInScreen extends StatelessWidget {
                   Get.toNamed(NameRoutes.homeScreen);
                 }),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                AuthMethod().googleSignInUser();
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 margin:
