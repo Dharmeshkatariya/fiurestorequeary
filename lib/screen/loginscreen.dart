@@ -44,21 +44,33 @@ class LogInScreen extends StatelessWidget {
                   _controller.loginUser();
                   Get.toNamed(NameRoutes.homeScreen);
                 }),
-            GestureDetector(
-              onTap: () {
-                AuthMethod().googleSignInUser();
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Image.asset(
-                  "assets/icon/g.png",
-                  height: 50,
-                ),
-              ),
+            Row(
+              children: [
+                _rowImage(
+                    image: "assets/icon/g.png",
+                    onTap: () {
+                      AuthMethod().googleSignInUser();
+                    }),
+                _rowImage(image: "assets/icon/p.jpg", onTap: () {
+                  Get.toNamed(NameRoutes.mobileVerificationScreen);
+                }),
+              ],
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _rowImage({required String image, GestureTapCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Image.asset(
+          image,
+          height: 50,
         ),
       ),
     );

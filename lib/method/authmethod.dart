@@ -1,6 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collectionoffirestore/common.dart';
 import 'package:collectionoffirestore/method/userstore_mnagment.dart';
+import 'package:collectionoffirestore/routes/nameroute.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -83,12 +84,12 @@ class AuthMethod {
     }
   }
 
-
   // log out google log out
-   googleSignOut()async{
+  googleSignOut() async {
     await googleSignIn.disconnect();
     auth.signOut();
-   }
+  }
+
 // sign out user
 
   signOutUser() async {
@@ -97,6 +98,46 @@ class AuthMethod {
       auth.signOut().then((value) => value);
     } catch (e) {
       res = e.toString();
+    }
+  }
+
+// mobile authentication mobile
+
+  mobileVerifySignIn({required String mobilecontroller}) async {
+    try {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      auth.verifyPhoneNumber(
+        phoneNumber: "+91 $mobilecontroller",
+        verificationFailed: (FirebaseAuthException e) {},
+        verificationCompleted: (PhoneAuthCredential credential) async {},
+        codeSent: (String verificationId, int? resendToken) async {
+          Common.verificationId = verificationId;
+          var receivedID = verificationId;
+          Get.toNamed(NameRoutes.otpScreen);
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+//  otp verify code
+  verifyOTPCode(
+      {required String verificationId, required String otpcontroller}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    try {
+      var verifiedId = verificationId;
+      String otp = otpcontroller;
+
+      UserCredential userCred = await auth.signInWithCredential(
+        PhoneAuthProvider.credential(
+          verificationId: verifiedId,
+          smsCode: otp,
+        ),
+      );
+    } catch (e) {
+      print(e);
     }
   }
 }
