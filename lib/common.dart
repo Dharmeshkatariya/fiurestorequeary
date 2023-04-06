@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Common {
   static  String verificationId= "";
@@ -23,9 +24,13 @@ class Common {
       {String? text, TextEditingController? controller, Widget? preicon}) {
     return TextFormField(
       controller: controller,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]"))
+      ],
       decoration: InputDecoration(
         prefixIcon: preicon,
         hintText: text,
+
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
