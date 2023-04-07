@@ -1,3 +1,4 @@
+import 'package:collectionoffirestore/screen/emptyview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,11 @@ class SignUpScreen extends GetView<SignUpScreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+        body: controller.obx(
+          onLoading: Center(child: CircularProgressIndicator(),),
+      onEmpty: EmptyViewScreen(),
+
+      (state) => SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: SingleChildScrollView(
@@ -62,6 +67,6 @@ class SignUpScreen extends GetView<SignUpScreenController> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

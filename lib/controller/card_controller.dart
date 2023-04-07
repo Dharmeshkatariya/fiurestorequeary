@@ -9,7 +9,7 @@ class CardController extends GetxController {
 
 
   addCardDataFireStore() {
-    FireStoreMethods().addData(cardNameController.text, cardColorController.text);
+    FireStoreMethods().subCollection(cardcolor:cardColorController.text,addcard: cardNameController.text );
   }
   @override
   void onInit() {

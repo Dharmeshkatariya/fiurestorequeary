@@ -59,42 +59,75 @@ class FireStoreMethods {
   }
 
   // collection delete document firestore
-delete()async{
-  await   fireStore.doc("id").delete();
-}
+  delete() async {
+    await fireStore.doc("id").delete();
+  }
 
 // random id add document fireso=tore
-randomDocAdd(){
-    fireStore.collection("user").add({
-      "user": "user"
-    }).then((value) {
+  randomDocAdd() {
+    fireStore.collection("user").add({"user": "user"}).then((value) {
       print(value);
     });
-}
+  }
 
 // add document specific id like emaail address , add doc id specific id
-emailAddData(){
-    fireStore.collection("users").doc("katariyadharmesh658").set({}).then((value) {
-
-    });
-}
+  emailAddData() {
+    fireStore
+        .collection("users")
+        .doc("katariyadharmesh658")
+        .set({}).then((value) {});
+  }
 
 // delete doc by id
-deleteDocById(){
-    fireStore.collection("users").doc("katariyadharmesh658").delete().then((value) {});
-}
+  deleteDocById() {
+    fireStore
+        .collection("users")
+        .doc("katariyadharmesh658")
+        .delete()
+        .then((value) {});
+  }
+
 // insert dynamic data key pair value
-  dynamicAddData(){
+  dynamicAddData() {
     fireStore.collection("users").doc("katariyadharmesh658").set({
-      "bool" : true,
-      "string 0 " : "string",
+      "bool": true,
+      "string 0 ": "string",
       "map ": {
-        "ram" : true,
+        "ram": true,
       },
       "lis": [],
       "int ": 200,
-    }).then((value) {
+    }).then((value) {});
+  }
 
+// subcollection in firestore
+  subCollection({required String addcard, required String cardcolor}) {
+    fireStore
+        .collection("carddata")
+        .doc("katariyadharmesh657")
+        .collection("payout history ")
+        .doc("katariyadharmesh657")
+        .set({
+      "add": addcard,
+      "color": cardcolor,
     });
-}
+  }
+
+  // get collection and subcollection firestore read data
+
+// getdatacollection with field is aupdate
+  getDataCollection() {
+    // final fireStore = FirebaseFirestore.instance.collection("user").snapshots();
+    // Text( "${snapshot.data!.docs[index]["ram"]}",),
+  }
+
+// get subcollectiom
+  getSubCollection() {
+    final fireStore = FirebaseFirestore.instance
+        .collection("carddata")
+        .doc("katariyadharmesh657")
+        .collection("payout history")
+        .snapshots();
+// Text( "${snapshot.data!.docs[index]["ram"]}",),
+  }
 }

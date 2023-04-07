@@ -1,6 +1,7 @@
 import 'package:collectionoffirestore/routes/pageroute.dart';
 import 'package:collectionoffirestore/screen/cardscreen.dart';
 import 'package:collectionoffirestore/screen/loginscreen.dart';
+import 'package:collectionoffirestore/screen/readdata.dart';
 import 'package:collectionoffirestore/screen/signuoscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home:  LogInScreen());
+        home: ReadData());
   }
 }
