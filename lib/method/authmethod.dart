@@ -3,6 +3,7 @@ import 'package:collectionoffirestore/common.dart';
 import 'package:collectionoffirestore/method/userstore_mnagment.dart';
 import 'package:collectionoffirestore/routes/nameroute.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -90,6 +91,43 @@ class AuthMethod {
     await googleSignIn.disconnect();
     auth.signOut();
   }
+
+  // facebook auth
+
+  facebookSignInUser() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+    if (result.status == LoginStatus.success) {
+      final AccessToken accessToken = result.accessToken!;
+      // use the accessToken to make API calls
+    } else {
+      print('Facebook login failed: ${result.status}');
+    }
+  }
+
+
+    Future<void> loginWithFacebook() async {
+      try {
+        final LoginResult result = await FacebookAuth.instance.login();
+
+        if (result.status == LoginStatus.success) {
+          final AccessToken accessToken = result.accessToken!;
+          final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
+
+          final UserCredential authResult = await FirebaseAuth.instance.signInWithCredential(credential);
+          final User? user = authResult.user;
+
+          if (user != null) {
+            // user is logged in
+          } else {
+            // authentication failed
+          }
+        } else {
+          // login failed
+        }
+      } catch (e) {
+        // handle error
+      }
+    }
 
 // sign out user
 
